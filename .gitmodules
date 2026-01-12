@@ -1,0 +1,3 @@
+[submodule "blockchain/Avalanche-course"]
+	path = blockchain/Avalanche-course
+	url = https://github.com/avalanche-indonesia/pamulang-university-short-course.git
