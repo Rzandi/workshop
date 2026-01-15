@@ -33,4 +33,14 @@ contract SimpleStorage {
         message = _message;
         emit MessageUpdated(_message);
     }
+
+    function setValueAndMessage(
+        uint256 _value,
+        string memory _message
+    ) public onlyOwner {
+        storedValue = _value;
+        message = _message;
+        emit ValueUpdated(_value);
+        emit MessageUpdated(_message);
+    }
 }
