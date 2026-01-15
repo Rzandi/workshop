@@ -12,22 +12,17 @@ import { injected } from 'wagmi/connectors';
 import { CONTRACT_ADDRESS, SIMPLE_STORAGE_ABI } from '@/lib/contract';
 
 export default function Page() {
-  // ==============================
-  // 🔹 WALLET STATE
-  // ==============================
+
+  // 🔹 WALLET STAT
   const { address, isConnected } = useAccount();
   const { connect, isPending: isConnecting } = useConnect();
   const { disconnect } = useDisconnect();
 
-  // ==============================
   // 🔹 LOCAL STATE
-  // ==============================
   const [inputValue, setInputValue] = useState('');
   const [inputMessage, setInputMessage] = useState('');
 
-  // ==============================
   // 🔹 READ CONTRACT
-  // ==============================
   const {
     data: value,
     isLoading: isReadingValue,
@@ -54,9 +49,7 @@ export default function Page() {
     functionName: 'owner',
   });
 
-  // ==============================
   // 🔹 WRITE CONTRACT
-  // ==============================
   const { writeContract, isPending: isWriting } = useWriteContract();
 
   const handleSetBoth = async () => {
@@ -69,9 +62,7 @@ export default function Page() {
     });
   };
 
-  // ==============================
   // 🔹 UI
-  // ==============================
   return (
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white p-4">
       <div className="w-full max-w-md border border-gray-700 rounded-2xl p-6 space-y-6 bg-black/50 backdrop-blur-sm shadow-2xl">
@@ -80,9 +71,7 @@ export default function Page() {
           🔺 Day 3 – Avalanche dApp
         </h1>
 
-        {/* ==========================
-            WALLET CONNECT
-        ========================== */}
+        {/* 🔹 WALLET CONNECT */}
         <div className="p-4 rounded-xl bg-gray-800/50 space-y-3">
           <p className="text-sm text-gray-400 font-medium">Step 1: Connect Wallet</p>
           
@@ -108,9 +97,7 @@ export default function Page() {
           )}
         </div>
 
-        {/* ==========================
-            READ CONTRACT
-        ========================== */}
+        {/* 🔹 READ CONTRACT */}
         <div className="p-4 rounded-xl bg-gray-800/50 space-y-3">
           <p className="text-sm text-gray-400 font-medium">Step 2: Read Contract</p>
 
@@ -145,9 +132,7 @@ export default function Page() {
           </button>
         </div>
 
-        {/* ==========================
-            WRITE CONTRACT - COMBINED
-        ========================== */}
+        {/* 🔹 WRITE CONTRACT - COMBINED */}
         <div className="p-4 rounded-xl bg-gradient-to-br from-cyan-900/30 to-purple-900/30 border border-cyan-700/50 space-y-3">
           <p className="text-sm text-gray-300 font-medium">Step 3: Update Both (1 Transaction)</p>
 
@@ -176,11 +161,9 @@ export default function Page() {
           </button>
         </div>
 
-        {/* ==========================
-            FOOTNOTE
-        ========================== */}
-        <p className="text-xs text-gray-600 text-center pt-2">
-          Smart contract = single source of truth 🔐
+        {/* 🔹 FOOTNOTE */}
+        <p className="text-xs text-gray-500 text-center">
+          Muhammad Fikri Rezandi | 231011402149
         </p>
 
       </div>
