@@ -1,0 +1,10 @@
+node_modules
+.env
+cache
+artifacts
+typechain
+typechain-types
+coverage
+coverage.json
+hardhat.config.js
+hardhat.config.d.ts
