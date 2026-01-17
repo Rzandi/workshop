@@ -11,8 +11,12 @@ async function bootstrap() {
 
   // Swagger setup
   const config = new DocumentBuilder()
-    .setTitle('Day 4 - Blockchain API')
-    .setDescription('Backend API for reading Avalanche Smart Contract data')
+    .setTitle('Day 4 - Blockchain Backend API')
+    .setDescription(
+      'Backend API for reading Avalanche Smart Contract data\n\n' +
+        'Nama: Muhammad Fikri Rezandi\n\n' +
+        'NIM: 231011402149',
+    )
     .setVersion('1.0')
     .addTag('blockchain')
     .build();
