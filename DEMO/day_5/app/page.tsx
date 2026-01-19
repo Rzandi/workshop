@@ -149,21 +149,27 @@ export default function Page() {
         </h1>
 
         {/* 🔹 READ MODE TOGGLE */}
-        <div className="flex items-center justify-center gap-4 p-3 rounded-xl bg-gray-800/30">
-          <span className={`text-sm ${!useBackendAPI ? 'text-cyan-400' : 'text-gray-500'}`}>Direct RPC</span>
+        <div className="flex items-center justify-center gap-2 p-3 rounded-xl bg-gray-800/30">
           <button
-            onClick={() => setUseBackendAPI(!useBackendAPI)}
-            className={`relative w-14 h-7 rounded-full transition-colors ${
-              useBackendAPI ? 'bg-green-600' : 'bg-gray-600'
+            onClick={() => setUseBackendAPI(false)}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+              !useBackendAPI 
+                ? 'bg-cyan-600 text-white shadow-lg shadow-cyan-600/30' 
+                : 'bg-gray-700 text-gray-400 hover:bg-gray-600'
             }`}
           >
-            <span
-              className={`absolute top-1 w-5 h-5 rounded-full bg-white transition-transform ${
-                useBackendAPI ? 'translate-x-8' : 'translate-x-1'
-              }`}
-            />
+            🔗 Direct RPC
           </button>
-          <span className={`text-sm ${useBackendAPI ? 'text-green-400' : 'text-gray-500'}`}>Backend API</span>
+          <button
+            onClick={() => setUseBackendAPI(true)}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+              useBackendAPI 
+                ? 'bg-green-600 text-white shadow-lg shadow-green-600/30' 
+                : 'bg-gray-700 text-gray-400 hover:bg-gray-600'
+            }`}
+          >
+            📡 Backend API
+          </button>
         </div>
 
         {/* 🔹 WALLET CONNECT */}
@@ -276,29 +282,29 @@ export default function Page() {
         <div className="p-4 rounded-xl bg-gray-800/50 space-y-3">
           <p className="text-sm text-gray-400 font-medium">📜 Event History (via Backend)</p>
           
-          <div className="flex gap-2">
+          <div className="grid grid-cols-2 gap-2">
             <input
               type="number"
               placeholder="From Block"
               value={fromBlock}
               onChange={(e) => setFromBlock(e.target.value)}
-              className="flex-1 p-2 rounded-lg bg-gray-900 border border-gray-700 text-sm focus:border-cyan-500 focus:outline-none"
+              className="p-2 rounded-lg bg-gray-900 border border-gray-700 text-sm focus:border-cyan-500 focus:outline-none"
             />
             <input
               type="number"
               placeholder="To Block"
               value={toBlock}
               onChange={(e) => setToBlock(e.target.value)}
-              className="flex-1 p-2 rounded-lg bg-gray-900 border border-gray-700 text-sm focus:border-cyan-500 focus:outline-none"
+              className="p-2 rounded-lg bg-gray-900 border border-gray-700 text-sm focus:border-cyan-500 focus:outline-none"
             />
-            <button
-              onClick={loadEvents}
-              disabled={isLoadingEvents}
-              className="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-sm disabled:opacity-50"
-            >
-              {isLoadingEvents ? '...' : 'Fetch'}
-            </button>
           </div>
+          <button
+            onClick={loadEvents}
+            disabled={isLoadingEvents}
+            className="w-full py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-sm font-medium disabled:opacity-50 transition-colors"
+          >
+            {isLoadingEvents ? '⏳ Loading...' : '📜 Fetch Events'}
+          </button>
 
           {eventsError && (
             <div className="text-sm text-red-400 bg-red-900/20 p-2 rounded">{eventsError}</div>
