@@ -1,49 +1,76 @@
-# Day 5 Frontend - Full Stack dApp
+# Day 5 - Full Stack dApp (Single Vercel Deployment)
 
-Next.js frontend integrated with Backend API for Avalanche dApp.
+Next.js Full Stack dApp dengan API Routes untuk Avalanche blockchain.
 
-## 🚀 Deployment to Vercel
+## 🚀 Deploy ke Vercel (Gratis, Tanpa Kartu Kredit!)
 
-### Step 1: Push to GitHub
+### Step 1: Push ke GitHub
 
 ```bash
-git init
 git add .
-git commit -m "Day 5 Frontend for Vercel deployment"
-git remote add origin https://github.com/YOUR_USERNAME/day5-frontend.git
-git push -u origin main
+git commit -m "Day 5 - Full Stack dApp"
+git push
 ```
 
-### Step 2: Deploy on Vercel
+### Step 2: Deploy di Vercel
 
-1. Go to [vercel.com](https://vercel.com)
-2. Click **"Add New Project"**
-3. Import your GitHub repository
-4. Vercel will auto-detect Next.js
+1. Buka [vercel.com](https://vercel.com)
+2. Sign up dengan GitHub (gratis)
+3. Click **"Add New Project"**
+4. Import repository kamu
+5. Vercel otomatis detect Next.js
 
 ### Step 3: Set Environment Variables
 
-In Vercel dashboard → Settings → Environment Variables:
+Di Vercel dashboard → Settings → Environment Variables:
 
-| Variable                       | Value                                        |
-| ------------------------------ | -------------------------------------------- |
-| `NEXT_PUBLIC_BACKEND_URL`      | `https://your-backend.railway.app`           |
-| `NEXT_PUBLIC_CONTRACT_ADDRESS` | `0x29be1a8eb7494a93470e07ed2e61cae0b4c7603b` |
+| Variable           | Value                                        |
+| ------------------ | -------------------------------------------- |
+| `RPC_URL`          | `https://api.avax-test.network/ext/bc/C/rpc` |
+| `CONTRACT_ADDRESS` | `0x29be1a8eb7494a93470e07ed2e61cae0b4c7603b` |
 
-> ⚠️ Replace `your-backend.railway.app` with your actual Railway backend URL!
+### Step 4: Deploy!
 
-### Step 4: Redeploy
-
-After setting environment variables, trigger a redeploy.
+Klik Deploy dan tunggu selesai 🎉
 
 ---
 
 ## ✨ Features
 
-- 🔄 **Dual Read Mode**: Toggle between Backend API and Direct RPC
-- 📝 **Write via Wallet**: Sign transactions with Core Wallet
-- 📜 **Event History**: View ValueUpdated events with block range
-- 🔄 **Auto-refresh**: Data refreshes after transaction confirmation
+- 🔄 **Dual Read Mode**: Toggle Backend API vs Direct RPC
+- 📝 **Write via Wallet**: Sign transactions dengan Core Wallet
+- 📜 **Event History**: Lihat ValueUpdated events
+- 🔄 **Auto-refresh**: Data refresh otomatis setelah transaction
+
+---
+
+## 🏗️ Architecture
+
+```
+┌────────────────────────────────────────────────┐
+│                  VERCEL                        │
+│  ┌──────────────┐    ┌──────────────────────┐ │
+│  │   Frontend   │───►│     API Routes       │ │
+│  │   (React)    │    │  /api/blockchain/*   │ │
+│  └──────────────┘    └──────────────────────┘ │
+└────────────────────────────────────────────────┘
+         │                       │
+         │ (wallet tx)           │ (read)
+         ▼                       ▼
+┌────────────────────────────────────────────────┐
+│            AVALANCHE FUJI BLOCKCHAIN           │
+│     Contract: 0x29be1a...7603b                │
+└────────────────────────────────────────────────┘
+```
+
+---
+
+## 📡 API Routes
+
+| Method | Endpoint                 | Description               |
+| ------ | ------------------------ | ------------------------- |
+| GET    | `/api/blockchain/value`  | Get value, message, owner |
+| POST   | `/api/blockchain/events` | Get event history         |
 
 ---
 
@@ -54,19 +81,7 @@ npm install
 npm run dev
 ```
 
-Frontend runs at `http://localhost:3000`
-
-Make sure backend is running at `http://localhost:3002`
-
----
-
-## 🏗️ Architecture
-
-```
-User → Frontend (Vercel) → Backend (Railway) → Blockchain (Avalanche)
-         ↓
-       Wallet → Blockchain (direct for transactions)
-```
+Frontend + API routes di `http://localhost:3000`
 
 ---
 
