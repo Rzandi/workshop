@@ -14,13 +14,16 @@ export class BlockchainService {
   private contractAddress: `0x${string}`;
 
   constructor() {
+    const rpcUrl = process.env.RPC_URL || 'https://api.avax-test.network/ext/bc/C/rpc';
+    const contractAddr = process.env.CONTRACT_ADDRESS || CONTRACT_ADDRESS;
+    
     this.client = createPublicClient({
       chain: avalancheFuji,
-      transport: http('https://api.avax-test.network/ext/bc/C/rpc', {
+      transport: http(rpcUrl, {
         timeout: 10_000,
       }),
     });
-    this.contractAddress = CONTRACT_ADDRESS;
+    this.contractAddress = contractAddr as `0x${string}`;
   }
 
   // 🔹 Read latest value + message + owner
